@@ -1,0 +1,39 @@
+<ion-header >
+  <ion-toolbar color="success">
+    <ion-buttons slot="start">
+      <ion-menu-button menu="main-menu">
+    
+      </ion-menu-button>
+    </ion-buttons>
+    <ion-title >Car Brockers</ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-card *ngFor="let item of companyList" color="success">
+  <span>
+    <ion-card-header>
+      <ion-card-title style="font-size:medium"> <a href="/bookings"> {{item.Name}} </a><a href="urban">Location:</a>{{item.Location}}</ion-card-title>
+      <ion-card-subtitle  style="font-size:medium">Operating Time: {{item.Time}}</ion-card-subtitle>
+    </ion-card-header>
+
+  </span>
+
+</ion-card>
+
+<ion-content>
+  <!--<div class="Nthako">
+    <a href="/nthako-motors"><ion-img id="nthako-rentals" src="assets/images/Nthako.jpg"></ion-img></a>
+  </div>
+  <P id="nthako-details">Location:Kolonyama, Leribe</P>-->
+  <!--<ion-list>
+    <ion-item *ngFor="let company of Companies | async">
+      <ion-label>
+        {{company.Name}}<br>
+        {{company.Location}}<br>
+        {{company.Time}}
+      </ion-label>
+    </ion-item>
+  
+  </ion-list>-->
+ 
+
+</ion-content>

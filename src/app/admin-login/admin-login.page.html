@@ -1,0 +1,57 @@
+<ion-header>
+  <ion-toolbar color="success">
+    <ion-buttons slot="start">
+      <ion-menu-button menu="main-menu">
+    
+      </ion-menu-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<ion-content [fullscreen]="true">
+  
+  <form [formGroup]="validationFormUser" (ngSubmit)="loginUser(validationFormUser.value)">
+    <div class="wrapform">
+    <fieldset color="red">
+    
+    <p class="log">Admin Login</p>
+    <ion-card class="Login-card">
+    
+      <ion-item>
+        <ion-input type="text" name="email" formControlName="email" placeholder="Email" required>
+          <ion-icon name="mail"></ion-icon>
+        </ion-input>
+      </ion-item>
+
+      <div>
+        <ng-container *ngFor="let validation of validationUserMessage.email">
+          <div class="Error_message" *ngIf="validationFormUser.get('email').hasError(validation.type) 
+          && (validationFormUser.get('email').dirty || validationFormUser.get('email').touched)">
+            {{validation.message}}
+            </div>
+        </ng-container>
+      </div>
+
+      <ion-item>
+        <ion-input type="password" name="password" formControlName="password" placeholder="Password" required>
+          <ion-icon name="lock-closed-sharp"></ion-icon>
+        </ion-input>
+      </ion-item>
+
+      <div>
+        <ng-container *ngFor="let validation of validationUserMessage.password">
+          <div class="Error_message" *ngIf="validationFormUser.get('password').hasError(validation.type)
+          && (validationFormUser.get('password').dirty || validationFormUser.get('password').touched)">
+            {{validation.message}}
+            </div>
+        </ng-container>
+        </div>
+      
+    </ion-card>
+  </fieldset>
+</div>
+
+        <ion-button [disabled]="!validationFormUser.valid" expand="full" type="submit" shape="round" size="medium" 
+        (ngSubmit)="loginUser(validationFormUser.value)" color="success">Login</ion-button>
+       
+  </form>
+</ion-content>

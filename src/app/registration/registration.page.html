@@ -1,0 +1,90 @@
+<ion-content [fullscreen]="true">
+  
+    <ion-card-header color="success">
+      <h5 class="registration">User Registration</h5> 
+    </ion-card-header>
+  
+  
+    <ion-card-content>
+      <form [formGroup]="validationFormUser" (ngSubmit)="registerUser(validationFormUser.value)">
+        <div class="wrapform">
+          <ion-item>
+            <ion-input type="text" name="customername" formControlName="customername" placeholder="Customer Name" required>
+              <ion-icon name="shield-checkmark-sharp"></ion-icon>
+            </ion-input>
+          </ion-item>
+          <div>
+            <ng-container *ngFor="let validation of validationUserMessage.customername">
+              <div class="Error_message" *ngIf="validationFormUser.get('customername').hasError(validation.type) && (validationFormUser.get('customername').dirty || validationFormUser.get('customername').touched)">
+                {{validation.message}}
+                </div>
+            </ng-container>
+          </div>
+        
+  
+          <ion-item>
+            <ion-input type="number" name="customernumber" formControlName="customernumber" placeholder="Customer Number" required>
+              <ion-icon name="call-sharp"></ion-icon>
+            </ion-input>
+          </ion-item>
+          <div>
+            <ng-container *ngFor="let validation of validationUserMessage.customernumber">
+              <div class="Error_message" *ngIf="validationFormUser.get('customernumber').hasError(validation.type) && (validationFormUser.get('customernumber').dirty || validationFormUser.get('customernumber').touched)">
+                {{validation.message}}
+                </div>
+            </ng-container>
+          </div>
+        
+  
+        <ion-item>
+          <ion-input type="email" name="email" formControlName="email" placeholder="Email" required>
+            <ion-icon name="mail"></ion-icon>
+          </ion-input>
+        </ion-item>
+        <div>
+          <ng-container *ngFor="let validation of validationUserMessage.email">
+            <div class="Error_message" *ngIf="validationFormUser.get('email').hasError(validation.type) && (validationFormUser.get('email').dirty || validationFormUser.get('email').touched)">
+              {{validation.message}}
+              </div>
+          </ng-container>
+        </div>
+      
+  
+        <ion-item>
+          <ion-input type="text" name="location" formControlName="location" placeholder="Location" required>
+            <ion-icon name="location"></ion-icon>
+          </ion-input>
+        </ion-item>
+        <div>
+          <ng-container *ngFor="let validation of validationUserMessage.location">
+            <div class="Error_message" *ngIf="validationFormUser.get('location').hasError(validation.type) && (validationFormUser.get('location').dirty || validationFormUser.get('location').touched)">
+              {{validation.message}}
+              </div>
+          </ng-container>
+        </div>
+      
+  
+        <ion-item>
+          <ion-input type="password" name="password" formControlName="password" placeholder="Password" required>
+            <ion-icon name="lock-closed-sharp"></ion-icon>
+          </ion-input>
+        </ion-item>
+        <div>
+          <ng-container *ngFor="let validation of validationUserMessage.password">
+            <div class="Error_message" *ngIf="validationFormUser.get('password').hasError(validation.type) && (validationFormUser.get('password').dirty || validationFormUser.get('password').touched)">
+              {{validation.message}}
+              </div>
+          </ng-container>
+        </div>
+      </div>
+      
+      
+        <ion-button (click)="registerUser(validationFormUser.value)" size="block" fill="solid" type="submit" shape="round" color="success" [disabled]="!validationFormUser.valid" >
+          Register
+        </ion-button>
+    
+      </form>
+    </ion-card-content>
+</ion-content>
+  
+  

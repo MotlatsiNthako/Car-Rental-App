@@ -1,0 +1,37 @@
+<ion-header>
+  <ion-toolbar color="success">
+    <ion-buttons slot="start">
+      <ion-menu-button menu="main-menu">
+    
+      </ion-menu-button>
+    </ion-buttons>
+    <ion-title>Feedback</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <form [formGroup]="feedbackForm" (ngSubmit)="createFeedback()">
+
+    <ion-item>
+      <ion-label position="floating">Feedback</ion-label>
+      <ion-textarea formControlName="Feedback"></ion-textarea>
+    </ion-item>
+
+    <ion-item>
+      <ion-button (click)="CreateFeedback()" [disabled]="feedbackForm.invalid" color="dark">
+        <ion-icon size="small"  slot="icon-only" name="add"></ion-icon>
+        &nbsp;Make Feedback
+      </ion-button>
+    </ion-item>
+
+  </form>
+  <ion-card *ngFor="let item of feedbackList" color="success">
+    <span *ngIf="!item.isEdit; else elseBlock">
+      <ion-card-header>
+        <ion-card-title>{{item.Feedback}}</ion-card-title>
+      </ion-card-header>
+
+    </span>
+
+  </ion-card>
+</ion-content>

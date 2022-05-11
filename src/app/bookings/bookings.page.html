@@ -1,0 +1,189 @@
+<!--<ion-header>
+  <ion-toolbar color="success">
+  <ion-buttons>
+    <ion-menu-button menu="main-menu">
+    
+    </ion-menu-button>
+  </ion-buttons>
+    <ion-title>Enjoy Your Journey</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <form>
+    <ion-item>
+      <ion-label>
+      <ion-input type="text" name="brand" placeholder="Brand">
+        <ion-icon name="car-sport-outline"></ion-icon>
+      </ion-input>
+    </ion-label>
+    </ion-item>
+    <ion-item>
+      <ion-label>
+      <ion-input type="number" name="price" placeholder="Price">
+        <ion-icon name="card-outline"></ion-icon>
+      </ion-input>
+    </ion-label>
+    </ion-item>
+    <ion-item>
+      <ion-label>
+        <ion-input placeholder="Company" >
+          <ion-icon name="business-outline"></ion-icon>
+        </ion-input>
+      </ion-label>
+    </ion-item>
+    <ion-item>
+      <ion-label>
+      <ion-input type="text" name="location" placeholder="Location">
+        <ion-icon name="location-outline"></ion-icon>
+      </ion-input>
+    </ion-label>
+    </ion-item>
+    <ion-item>
+      <ion-icon name="time-outline"></ion-icon>
+      Pick-Up<input type="datetime-local" value="2000-01-01T00:00:00" />
+    </ion-item>
+    <ion-item>
+      <ion-icon name="time-outline"></ion-icon>
+      Return<input type="datetime-local" value="2000-01-01T00:00:00" />
+    </ion-item>
+    <ion-button color="success" expand="full" type="submit" shape="round">Book Now</ion-button>
+  </form>
+
+</ion-content>-->
+<ion-header [translucent]="true">
+  <ion-toolbar color="success">
+    <ion-buttons slot="start">
+      <ion-menu-button menu="main-menu">
+    
+      </ion-menu-button>
+    </ion-buttons>
+    <ion-title>
+      Enjoy Your Journey
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" class="ion-padding">
+
+  <form [formGroup]="bookingsForm" (ngSubmit)="CreateRecord()">
+
+    <ion-item>
+      <ion-input formControlName="Name" placeholder="Company Name" >
+        <ion-icon name="business-outline"></ion-icon>
+      </ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-input formControlName="Brand" placeholder="Brand">
+        <ion-icon name="car-sport-outline"></ion-icon>
+      </ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-input formControlName="Price" placeholder="Price">
+        <ion-icon name="card-outline"></ion-icon>
+      </ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-input formControlName="Location" placeholder="Location">
+        <ion-icon name="location-outline"></ion-icon>
+      </ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-input formControlName="PickUp" placeholder="Location">
+        <ion-icon name="time-outline"></ion-icon>
+      </ion-input>
+      
+    </ion-item>
+
+    <ion-item>
+
+      <ion-input formControlName="Return" placeholder="Location">
+        <ion-icon name="time-outline"></ion-icon>
+      </ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-button (click)="createBookings" [disabled]="bookingsForm.invalid" color="dark">
+        <ion-icon size="small"  slot="icon-only" name="add"></ion-icon>
+        &nbsp;Book Now
+      </ion-button>
+    </ion-item>
+
+  </form>
+
+
+  <ion-card *ngFor="let item of bookingsList" color="success">
+    <span *ngIf="!item.isEdit; else elseBlock">
+      <ion-card-header>
+        <ion-card-title>{{item.Name}} Brand: {{item.Brand}}Price:{{item.Price}}Location: {{item.Location}}
+          Pick-Up: {{item.Pick-Up}} Return: {{item.Return}}</ion-card-title>
+        <ion-card-subtitle>Operating Time: {{item.Time}}</ion-card-subtitle>
+      </ion-card-header>
+      <ion-card-content>
+
+        <ion-button shape="round" color="secondary" size="small" (click)="EditRecord(item)">
+          <ion-icon size="small" slot="icon-only" name="create"></ion-icon>
+
+        </ion-button>
+        <ion-button shape="round" color="danger" size="small" (click)="RemoveRecord(item.id)">
+          <ion-icon size="small" slot="icon-only" name="trash"></ion-icon>
+
+        </ion-button>
+      </ion-card-content>
+    </span>
+    <ng-template #elseBlock>
+      <ion-card-header>
+        <ion-card-title>
+          <ion-grid>
+            <ion-row>
+              <ion-col>
+                Edit
+              </ion-col>
+              <ion-col>
+                <ion-button fill="solid" color="medium" size="small" (click)="item.isEdit = false">
+                  Cancel
+                </ion-button>
+              </ion-col>
+              <ion-col>
+                <ion-button fill="solid" color="success" size="small" (click)="UpdateRecord(item)">
+                  Update
+                </ion-button>
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+        </ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        <ion-item>
+          <ion-label><strong>Name</strong></ion-label>
+          <ion-input type="text" [(ngModel)]="item.EditName"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label><strong>Brand</strong></ion-label>
+          <ion-input type="text" [(ngModel)]="item.EditBrand"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label><strong>Price</strong></ion-label>
+          <ion-input type="number" [(ngModel)]="item.EditPrice"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label><strong>Location</strong></ion-label>
+          <ion-input type="text" [(ngModel)]="item.EditLocation"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label><strong>PickUp</strong></ion-label>
+          <ion-input type="datetime-local" [(ngModel)]="item.EditPickUp"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label><strong>Return</strong></ion-label>
+          <ion-input type="datetime-local" [(ngModel)]="item.Return"></ion-input>
+        </ion-item>
+      </ion-card-content>
+    </ng-template>
+  </ion-card>
+
+</ion-content>
