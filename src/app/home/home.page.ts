@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { NavController } from '@ionic/angular';
+import { LoadingController, NavController } from '@ionic/angular';
 import { IonicAuthService } from '../ionic-auth.service';
 
 @Component({
@@ -24,6 +24,7 @@ export class HomePage implements OnInit {
   };
 
   constructor(public formbuilder: FormBuilder, public ionicauthservice: IonicAuthService,
+     private loadingcontroller: LoadingController,
      private router: Router, public nav: NavController) { }
 
   ngOnInit() {
@@ -42,11 +43,13 @@ export class HomePage implements OnInit {
 
   loginUser(value){
     console.log('Am logged In');
+    //this.loadingcontroller.create();
     try{
       this.ionicauthservice.loginFireauth(value).then(resp =>{
         console.log(resp);
         this.router.navigate(['user-dashboard']);
       });
+      //this.loadingcontroller.dismiss();
     }catch(err){
       console.log(err);
     }

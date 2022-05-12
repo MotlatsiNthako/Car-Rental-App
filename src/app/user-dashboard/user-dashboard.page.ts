@@ -4,6 +4,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AddCompanyService } from '../add-company.service';
 import { FormGroup, Validators, FormBuilder } from '@angular/forms';
+import { LoadingController } from '@ionic/angular';
 
 interface CompanyData {
   Name: string;
@@ -21,6 +22,7 @@ export class UserDashboardPage implements OnInit {
   companyForm: FormGroup;
 
   constructor( private addcompanyservice: AddCompanyService,
+     private loadingcontroller: LoadingController,
     public fb: FormBuilder) {
       this.companyData = {} as CompanyData;
      }
